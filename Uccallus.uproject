@@ -5,7 +5,7 @@
 	"Description": "",
 	"Modules": [
 		{
-			"Name": "lantern_test",
+			"Name": "Uccallus",
 			"Type": "Runtime",
 			"LoadingPhase": "Default"
 		}
