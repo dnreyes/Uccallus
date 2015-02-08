@@ -1,5 +1,6 @@
 // Copyright 1998-2014 Epic Games, Inc. All Rights Reserved.
 #pragma once
+
 #include "GameFramework/Character.h"
 #include "UccallusCharacter.generated.h"
 
@@ -22,7 +23,44 @@ public:
 
 	/** Returns TopDownCameraComponent subobject **/
 	FORCEINLINE class UCameraComponent* GetTopDownCameraComponent() const { return TopDownCameraComponent; }
+    
 	/** Returns CameraBoom subobject **/
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
+    
+    /***----------ADDED CODE BASED OF TUTORIAL----------***/
+    
+    /*
+     * Radius of visibility will increase with each lantern piece found
+     */
+    UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Energy)
+    float lightRadius;
+    
+    /*
+     * Collection volume
+     * might be appliciable for all of the stuff that should be interactable
+     * with the character.
+     */
+    UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Energy)
+    class USphereComponent* CollectionSphere;
+//
+//    /*
+//     * probably will be used for decrease of clus in lantern
+//     */
+//    virtual void Tick(float DeltaSeconds) override;
+    
+protected:
+    
+    /*
+     * called when we press a key, to collect the pieces inside the SphereComponent
+     */
+    UFUNCTION(BlueprintCallable, Category = Energy)
+    void collectPieces();
+    
+    
+    UFUNCTION(BlueprintImplementableEvent, Category = Energy)
+    void addToLantern();
+    
+    virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;
+    
 };
 

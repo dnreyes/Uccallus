@@ -1,13 +1,23 @@
 // Copyright 1998-2014 Epic Games, Inc. All Rights Reserved.
 
+
 #include "Uccallus.h"
 #include "UccallusCharacter.h"
-//#include "lantern.h"
+#include "LanternPiecePickup.h"
+//#include "Lantern.h"
 #include "Animation/AnimInstance.h"
 
 AUccallusCharacter::AUccallusCharacter(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
+    
+    lightRadius = 10.0f;
+    
+    //collisions
+    CollectionSphere = ObjectInitializer.CreateDefaultSubobject<USphereComponent>(this, TEXT("CollectionSphere"));
+    CollectionSphere->AttachTo(RootComponent);
+    CollectionSphere->SetSphereRadius(200.f);
+    
 	// Set size for player capsule
 	GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
 
@@ -36,12 +46,31 @@ AUccallusCharacter::AUccallusCharacter(const FObjectInitializer& ObjectInitializ
 	TopDownCameraComponent->bUsePawnControlRotation = false; // Camera does not rotate relative to arm
 
 }
-/*
-//Input
+
 void AUccallusCharacter::SetupPlayerInputComponent(class UInputComponent* InputComponent) {
 	//set up gameplay key bindings
 
 	check(InputComponent);
 
-	InputComponent->BindAction("Fire"), IE_Pressed, this, &AUccallusCharacter::MoveForward);
-}*/
+    InputComponent->BindAction("CollectPickups", IE_Pressed, this, &AUccallusCharacter::collectPieces);
+}
+
+void AUccallusCharacter::collectPieces()
+{
+    //get all overlapping actors and store them in a collected Actors array
+    
+    TArray<AActor*> collectedActors;
+    CollectionSphere->GetOverlappingActors(collectedActors);
+    
+    for(int32 iCollected = 0; iCollected < collectedActors.Num(); ++iCollected) {
+        //Cast the collected Actor to ALanternPiecePickup
+        
+        ALanternPiecePickup* const TestPiece = Cast<ALanternPiecePickup>(collectedActors[iCollected]);
+        
+        if (TestPiece && !TestPiece->IsPendingKill() && TestPiece->bIsActive)
+        {
+            TestPiece->OnPickedUp();
+            TestPiece->bIsActive = false;
+        }
+    }
+}
