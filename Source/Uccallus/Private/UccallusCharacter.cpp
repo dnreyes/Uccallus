@@ -1,13 +1,28 @@
 // Copyright 1998-2014 Epic Games, Inc. All Rights Reserved.
 
+
 #include "Uccallus.h"
 #include "UccallusCharacter.h"
-//#include "lantern.h"
+#include "LanternPiecePickup.h"
+#include "Lantern.h"
 #include "Animation/AnimInstance.h"
 
 AUccallusCharacter::AUccallusCharacter(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
+    
+    /******----------------Added Code---------------******/
+    
+    lightRadius = 10.0f;
+    energyLevel = CharLantern->cluCounter;
+    
+    //collisions
+    CollectionSphere = ObjectInitializer.CreateDefaultSubobject<USphereComponent>(this, TEXT("CollectionSphere"));
+    CollectionSphere->AttachTo(RootComponent);
+    CollectionSphere->SetSphereRadius(200.f);
+    
+    /******------------End of Added Code------------******/
+    
 	// Set size for player capsule
 	GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
 
@@ -36,12 +51,42 @@ AUccallusCharacter::AUccallusCharacter(const FObjectInitializer& ObjectInitializ
 	TopDownCameraComponent->bUsePawnControlRotation = false; // Camera does not rotate relative to arm
 
 }
-/*
-//Input
+
+
+/******----------------Added Code---------------******/
+
 void AUccallusCharacter::SetupPlayerInputComponent(class UInputComponent* InputComponent) {
 	//set up gameplay key bindings
 
 	check(InputComponent);
 
-	InputComponent->BindAction("Fire"), IE_Pressed, this, &AUccallusCharacter::MoveForward);
-}*/
+    InputComponent->BindAction("CollectPickups", IE_Pressed, this, &AUccallusCharacter::collectPieces);
+}
+
+void AUccallusCharacter::collectPieces()
+{
+    //get all overlapping actors and store them in a collected Actors array
+    
+    TArray<AActor*> collectedActors;
+    CollectionSphere->GetOverlappingActors(collectedActors);
+    
+    for(int32 iCollected = 0; iCollected < collectedActors.Num(); ++iCollected) {
+        
+        //Cast the collected Actor to ALanternPiecePickup
+        ALanternPiecePickup* const TestPiece = Cast<ALanternPiecePickup>(collectedActors[iCollected]);
+        
+        if (TestPiece && !TestPiece->IsPendingKill() && TestPiece->bIsActive)
+        {
+            CharLantern->onPiecePickedUp(TestPiece);
+            TestPiece->OnPickedUp();
+            TestPiece->bIsActive = false;
+        }
+    }
+}
+
+void AUccallusCharacter::Tick(float DeltaSeconds)
+{
+    Super::Tick(DeltaSeconds);
+    CharLantern->decreaseCounter();
+    energyLevel = CharLantern->cluCounter;
+}
