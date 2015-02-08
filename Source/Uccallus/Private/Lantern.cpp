@@ -17,8 +17,7 @@ void ALantern::pickUpClus()
     
 }
 
-//main function for adding more clus to the lantern
-float ALantern::calculateMath(const TArray<FString> pieces){
+int32 ALantern::calculateMath(const TArray<FString> pieces){
     //should probably look at UnrealMathUtility.h
     //                    and GenericPlatform.h
     return 0;

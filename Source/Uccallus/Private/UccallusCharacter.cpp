@@ -4,19 +4,24 @@
 #include "Uccallus.h"
 #include "UccallusCharacter.h"
 #include "LanternPiecePickup.h"
-//#include "Lantern.h"
+#include "Lantern.h"
 #include "Animation/AnimInstance.h"
 
 AUccallusCharacter::AUccallusCharacter(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
     
+    /******----------------Added Code---------------******/
+    
     lightRadius = 10.0f;
+    energyLevel = CharLantern->cluCounter;
     
     //collisions
     CollectionSphere = ObjectInitializer.CreateDefaultSubobject<USphereComponent>(this, TEXT("CollectionSphere"));
     CollectionSphere->AttachTo(RootComponent);
     CollectionSphere->SetSphereRadius(200.f);
+    
+    /******------------End of Added Code------------******/
     
 	// Set size for player capsule
 	GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
@@ -47,6 +52,9 @@ AUccallusCharacter::AUccallusCharacter(const FObjectInitializer& ObjectInitializ
 
 }
 
+
+/******----------------Added Code---------------******/
+
 void AUccallusCharacter::SetupPlayerInputComponent(class UInputComponent* InputComponent) {
 	//set up gameplay key bindings
 
@@ -63,14 +71,22 @@ void AUccallusCharacter::collectPieces()
     CollectionSphere->GetOverlappingActors(collectedActors);
     
     for(int32 iCollected = 0; iCollected < collectedActors.Num(); ++iCollected) {
-        //Cast the collected Actor to ALanternPiecePickup
         
+        //Cast the collected Actor to ALanternPiecePickup
         ALanternPiecePickup* const TestPiece = Cast<ALanternPiecePickup>(collectedActors[iCollected]);
         
         if (TestPiece && !TestPiece->IsPendingKill() && TestPiece->bIsActive)
         {
+            CharLantern->onPiecePickedUp(TestPiece);
             TestPiece->OnPickedUp();
             TestPiece->bIsActive = false;
         }
     }
+}
+
+void AUccallusCharacter::Tick(float DeltaSeconds)
+{
+    Super::Tick(DeltaSeconds);
+    CharLantern->decreaseCounter();
+    energyLevel = CharLantern->cluCounter;
 }

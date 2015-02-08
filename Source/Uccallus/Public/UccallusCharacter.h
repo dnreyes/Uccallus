@@ -35,6 +35,10 @@ public:
     UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Energy)
     float lightRadius;
     
+    
+    UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Energy)
+    int32 energyLevel;
+    
     /*
      * Collection volume
      * might be appliciable for all of the stuff that should be interactable
@@ -42,11 +46,10 @@ public:
      */
     UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Energy)
     class USphereComponent* CollectionSphere;
-//
-//    /*
-//     * probably will be used for decrease of clus in lantern
-//     */
-//    virtual void Tick(float DeltaSeconds) override;
+    
+    class ALantern* CharLantern;
+    
+    virtual void Tick(float DeltaSeconds) override;
     
 protected:
     
