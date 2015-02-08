@@ -2,18 +2,45 @@
 
 #pragma once
 
+<<<<<<< HEAD
 #include "Array.h"
+=======
+#include <string>
+#include <vector>
+
+>>>>>>> FETCH_HEAD
 #include "GameFramework/Actor.h"
 #include "Lantern.generated.h"
 
+using namespace std;
 /**
- * 
+ * Lantern Main Class. This class deals with the
+ * main functionality of the lantern class,
+ * such as checking if it is empty, what pieces
+ * it has, which function to use, etc.
  */
 UCLASS()
 class UCCALLUS_API ALantern : public AActor
 {
 	GENERATED_BODY()
+
+private:
+	void pickUpClus();
+
+	int calculateMath(const vector<string> pieces);
+
+	void decreaseCounter();
+
+	bool lanternEmpty();
+
+	void increaseCap();
+
+	void OnPiecePickedUp(string piece);
+
+public:
+	string pieceName;
 	
+<<<<<<< HEAD
 public:
     
     ALantern(const FObjectInitializer& ObjectInitializer);
@@ -56,4 +83,10 @@ private:
     
     
 	
+=======
+	int cluCounter;
+	
+	int capacity;
+
+>>>>>>> FETCH_HEAD
 };

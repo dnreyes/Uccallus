@@ -154,7 +154,8 @@ $RECYCLE.BIN/
 DerivedDataCache/
 Intermediate/
 Saved/
-
+Content/Maps/Example_Map.umap
+Content/Maps/Example_Map.umap
 .svn/entries
 .svn/format
 .svn/wc.db
@@ -166,3 +167,10 @@ Content/.svn/wc.db
 Content/Maps/Test_Map.umap
 RTSTemplate.uproject
 Content/_LAB/
+
+######
+##Mac/OSX
+######
+
+.dylib
+Uccallus/xcodeproj/
