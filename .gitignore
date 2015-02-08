@@ -167,3 +167,10 @@ Content/.svn/wc.db
 Content/Maps/Test_Map.umap
 RTSTemplate.uproject
 Content/_LAB/
+
+######
+##Mac/OSX
+######
+
+.dylib
+Uccallus/xcodeproj/
