@@ -14,7 +14,7 @@ class UCCALLUS_API ALanternPiecePickup : public APickup
 	GENERATED_BODY()
 	
 public:
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Energy)
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Power)
     FString name;
     
     int value;
