@@ -2,7 +2,9 @@
 #pragma once
 
 #include "GameFramework/Character.h"
+#include "Lantern.h"
 #include "UccallusCharacter.generated.h"
+
 
 UCLASS(Blueprintable)
 class AUccallusCharacter : public ACharacter
@@ -32,11 +34,11 @@ public:
     /*
      * Radius of visibility will increase with each lantern piece found
      */
-    UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Energy)
+    UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Power)
     float lightRadius;
     
     
-    UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Energy)
+    UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Power)
     int32 energyLevel;
     
     /*
@@ -44,10 +46,12 @@ public:
      * might be appliciable for all of the stuff that should be interactable
      * with the character.
      */
-    UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Energy)
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Power)
     class USphereComponent* CollectionSphere;
     
+    UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Power)
     class ALantern* CharLantern;
+
     
     virtual void Tick(float DeltaSeconds) override;
     
@@ -56,11 +60,11 @@ protected:
     /*
      * called when we press a key, to collect the pieces inside the SphereComponent
      */
-    UFUNCTION(BlueprintCallable, Category = Energy)
+    UFUNCTION(BlueprintCallable, Category = Power)
     void collectPieces();
     
     
-    UFUNCTION(BlueprintImplementableEvent, Category = Energy)
+    UFUNCTION(BlueprintImplementableEvent, Category = Power)
     void addToLantern();
     
     virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;

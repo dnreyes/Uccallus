@@ -14,7 +14,6 @@ AUccallusCharacter::AUccallusCharacter(const FObjectInitializer& ObjectInitializ
     /******----------------Added Code---------------******/
     
     lightRadius = 10.0f;
-    energyLevel = CharLantern->cluCounter;
     
     //collisions
     CollectionSphere = ObjectInitializer.CreateDefaultSubobject<USphereComponent>(this, TEXT("CollectionSphere"));
@@ -88,5 +87,4 @@ void AUccallusCharacter::Tick(float DeltaSeconds)
 {
     Super::Tick(DeltaSeconds);
     CharLantern->decreaseCounter();
-    energyLevel = CharLantern->cluCounter;
 }
