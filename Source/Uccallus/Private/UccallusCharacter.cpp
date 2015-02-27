@@ -13,7 +13,10 @@ AUccallusCharacter::AUccallusCharacter(const FObjectInitializer& ObjectInitializ
     
     /******----------------Added Code---------------******/
     
+	
+
     lightRadius = 10.0f;
+	energyLevel = 10;
     
     //collisions
     CollectionSphere = ObjectInitializer.CreateDefaultSubobject<USphereComponent>(this, TEXT("CollectionSphere"));
@@ -76,7 +79,7 @@ void AUccallusCharacter::collectPieces()
         
         if (TestPiece && !TestPiece->IsPendingKill() && TestPiece->bIsActive)
         {
-            CharLantern->onPiecePickedUp(TestPiece);
+            //CharLantern->onPiecePickedUp(TestPiece);
             TestPiece->OnPickedUp();
             TestPiece->bIsActive = false;
         }
@@ -86,5 +89,5 @@ void AUccallusCharacter::collectPieces()
 void AUccallusCharacter::Tick(float DeltaSeconds)
 {
     Super::Tick(DeltaSeconds);
-    CharLantern->decreaseCounter();
+    //CharLantern->decreaseCounter();
 }

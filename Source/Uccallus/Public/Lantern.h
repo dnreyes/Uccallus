@@ -20,7 +20,6 @@ public:
     
     ALantern(const FObjectInitializer& ObjectInitializer);
     
-    
     //The clu cap in the lantern
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Power)
     int32 capacity;
@@ -42,6 +41,7 @@ public:
     bool isEmpty();
     
     //slowly decreases during the game
+	UFUNCTION(BlueprintCallable, Category = Power)
     void decreaseCounter();
     
     //main function for adding more clus to the lantern
@@ -49,8 +49,7 @@ public:
     
     UFUNCTION(BlueprintCallable, Category = Power)
     void onPiecePickedUp(AActor* piece);
-    
-private:
+   
     //needs a pickup class
     void pickUpClus();
     
