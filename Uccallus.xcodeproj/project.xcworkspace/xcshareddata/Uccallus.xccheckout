@@ -5,13 +5,13 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>531CFDBA-239B-45C2-A210-E480AD8A1A89</string>
+	<string>AEE5D4C3-A043-4AAF-B63B-85803B2926D3</string>
 	<key>IDESourceControlProjectName</key>
 	<string>Uccallus</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>B587F158B6EFCA86FC405E489C1336DFFB2B18A0</key>
-		<string>https://github.com/asksuyo/Uccallus.git</string>
+		<string>https://github.com/dnreyes/Uccallus.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>Uccallus.xcodeproj</string>
@@ -21,7 +21,7 @@
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/asksuyo/Uccallus.git</string>
+	<string>https://github.com/dnreyes/Uccallus.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
