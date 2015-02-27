@@ -41,33 +41,10 @@ public:
     UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Power)
     int32 energyLevel;
     
-    /*
-     * Collection volume
-     * might be appliciable for all of the stuff that should be interactable
-     * with the character.
-     */
-    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Power)
-    class USphereComponent* CollectionSphere;
-    
     UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Power)
     class ALantern* CharLantern;
 
-    
-    virtual void Tick(float DeltaSeconds) override;
-    
-protected:
-    
-    /*
-     * called when we press a key, to collect the pieces inside the SphereComponent
-     */
-    UFUNCTION(BlueprintCallable, Category = Power)
-    void collectPieces();
-    
-    
-    UFUNCTION(BlueprintImplementableEvent, Category = Power)
-    void addToLantern();
-    
-    virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;
-    
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Lantern)
+	TArray<AActor*> pieces;
 };
 
