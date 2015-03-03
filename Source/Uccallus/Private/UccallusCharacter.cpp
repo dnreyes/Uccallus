@@ -11,15 +11,8 @@ AUccallusCharacter::AUccallusCharacter(const FObjectInitializer& ObjectInitializ
     
     /******----------------Added Code---------------******/
     
-	
-
     lightRadius = 10.0f;
-	energyLevel = 10;
-    
-    //collisions
-    CollectionSphere = ObjectInitializer.CreateDefaultSubobject<USphereComponent>(this, TEXT("CollectionSphere"));
-    CollectionSphere->AttachTo(RootComponent);
-    CollectionSphere->SetSphereRadius(200.f);
+    energyLevel = 10;
     
     /******------------End of Added Code------------******/
     
@@ -50,12 +43,4 @@ AUccallusCharacter::AUccallusCharacter(const FObjectInitializer& ObjectInitializ
 	TopDownCameraComponent->AttachTo(CameraBoom, USpringArmComponent::SocketName);
 	TopDownCameraComponent->bUsePawnControlRotation = false; // Camera does not rotate relative to arm
 
-}
-
-
-
-void AUccallusCharacter::Tick(float DeltaSeconds)
-{
-    Super::Tick(DeltaSeconds);
-    //CharLantern->decreaseCounter();
 }
