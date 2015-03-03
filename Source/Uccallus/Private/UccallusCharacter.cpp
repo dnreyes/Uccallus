@@ -3,8 +3,6 @@
 
 #include "Uccallus.h"
 #include "UccallusCharacter.h"
-#include "LanternPiecePickup.h"
-#include "Lantern.h"
 #include "Animation/AnimInstance.h"
 
 AUccallusCharacter::AUccallusCharacter(const FObjectInitializer& ObjectInitializer)
@@ -14,11 +12,7 @@ AUccallusCharacter::AUccallusCharacter(const FObjectInitializer& ObjectInitializ
     /******----------------Added Code---------------******/
     
     lightRadius = 10.0f;
-    
-    //collisions
-    CollectionSphere = ObjectInitializer.CreateDefaultSubobject<USphereComponent>(this, TEXT("CollectionSphere"));
-    CollectionSphere->AttachTo(RootComponent);
-    CollectionSphere->SetSphereRadius(200.f);
+    energyLevel = 10;
     
     /******------------End of Added Code------------******/
     
@@ -49,42 +43,4 @@ AUccallusCharacter::AUccallusCharacter(const FObjectInitializer& ObjectInitializ
 	TopDownCameraComponent->AttachTo(CameraBoom, USpringArmComponent::SocketName);
 	TopDownCameraComponent->bUsePawnControlRotation = false; // Camera does not rotate relative to arm
 
-}
-
-
-/******----------------Added Code---------------******/
-
-void AUccallusCharacter::SetupPlayerInputComponent(class UInputComponent* InputComponent) {
-	//set up gameplay key bindings
-
-	check(InputComponent);
-
-    InputComponent->BindAction("CollectPickups", IE_Pressed, this, &AUccallusCharacter::collectPieces);
-}
-
-void AUccallusCharacter::collectPieces()
-{
-    //get all overlapping actors and store them in a collected Actors array
-    
-    TArray<AActor*> collectedActors;
-    CollectionSphere->GetOverlappingActors(collectedActors);
-    
-    for(int32 iCollected = 0; iCollected < collectedActors.Num(); ++iCollected) {
-        
-        //Cast the collected Actor to ALanternPiecePickup
-        ALanternPiecePickup* const TestPiece = Cast<ALanternPiecePickup>(collectedActors[iCollected]);
-        
-        if (TestPiece && !TestPiece->IsPendingKill() && TestPiece->bIsActive)
-        {
-            CharLantern->onPiecePickedUp(TestPiece);
-            TestPiece->OnPickedUp();
-            TestPiece->bIsActive = false;
-        }
-    }
-}
-
-void AUccallusCharacter::Tick(float DeltaSeconds)
-{
-    Super::Tick(DeltaSeconds);
-    CharLantern->decreaseCounter();
 }
