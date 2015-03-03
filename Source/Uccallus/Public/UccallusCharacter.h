@@ -2,7 +2,6 @@
 #pragma once
 
 #include "GameFramework/Character.h"
-#include "Lantern.h"
 #include "UccallusCharacter.generated.h"
 
 
@@ -48,21 +47,11 @@ public:
      */
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Power)
     class USphereComponent* CollectionSphere;
-    
-    UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Power)
-    class ALantern* CharLantern;
 
     
     virtual void Tick(float DeltaSeconds) override;
     
 protected:
-    
-    /*
-     * called when we press a key, to collect the pieces inside the SphereComponent
-     */
-    UFUNCTION(BlueprintCallable, Category = Power)
-    void collectPieces();
-    
     
     UFUNCTION(BlueprintImplementableEvent, Category = Power)
     void addToLantern();

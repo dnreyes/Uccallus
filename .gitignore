@@ -178,3 +178,4 @@ Content/_LAB/
 
 .dylib
 Uccallus/xcodeproj/
+*.sln

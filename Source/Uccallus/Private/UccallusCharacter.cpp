@@ -3,8 +3,6 @@
 
 #include "Uccallus.h"
 #include "UccallusCharacter.h"
-#include "LanternPiecePickup.h"
-#include "Lantern.h"
 #include "Animation/AnimInstance.h"
 
 AUccallusCharacter::AUccallusCharacter(const FObjectInitializer& ObjectInitializer)
@@ -55,36 +53,6 @@ AUccallusCharacter::AUccallusCharacter(const FObjectInitializer& ObjectInitializ
 }
 
 
-/******----------------Added Code---------------******/
-
-void AUccallusCharacter::SetupPlayerInputComponent(class UInputComponent* InputComponent) {
-	//set up gameplay key bindings
-
-	check(InputComponent);
-
-    InputComponent->BindAction("CollectPickups", IE_Pressed, this, &AUccallusCharacter::collectPieces);
-}
-
-void AUccallusCharacter::collectPieces()
-{
-    //get all overlapping actors and store them in a collected Actors array
-    
-    TArray<AActor*> collectedActors;
-    CollectionSphere->GetOverlappingActors(collectedActors);
-    
-    for(int32 iCollected = 0; iCollected < collectedActors.Num(); ++iCollected) {
-        
-        //Cast the collected Actor to ALanternPiecePickup
-        ALanternPiecePickup* const TestPiece = Cast<ALanternPiecePickup>(collectedActors[iCollected]);
-        
-        if (TestPiece && !TestPiece->IsPendingKill() && TestPiece->bIsActive)
-        {
-            //CharLantern->onPiecePickedUp(TestPiece);
-            TestPiece->OnPickedUp();
-            TestPiece->bIsActive = false;
-        }
-    }
-}
 
 void AUccallusCharacter::Tick(float DeltaSeconds)
 {
