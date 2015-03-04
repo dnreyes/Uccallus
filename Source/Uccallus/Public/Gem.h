@@ -12,11 +12,11 @@
 UENUM(BlueprintType)
 enum class EGemtypeEnum : uint8
 {
-    GE_Yellow  UMETA(DisplayName = "Yellow"),
-    GE_Green   UMETA(DisplayName = "Green"),
-    GE_Red     UMETA(DisplayName = "Red"),
-    GE_Pearl   UMETA(DisplayName = "Pearl"),
-    GE_Diamond UMETA(DisplayName = "Diamond")
+    GE_Yellow  =  1   UMETA(DisplayName = "Yellow"),
+    GE_Green   =  3   UMETA(DisplayName = "Green"),
+    GE_Red     =  5   UMETA(DisplayName = "Red"),
+    GE_Pearl   =  8   UMETA(DisplayName = "Pearl"),
+    GE_Diamond = 13   UMETA(DisplayName = "Diamond")
 };
 UCLASS()
 class UCCALLUS_API AGem : public AActor

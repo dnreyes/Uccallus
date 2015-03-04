@@ -3,9 +3,6 @@
 #include "Uccallus.h"
 #include "Pickup.h"
 
-
-
-
 APickup::APickup(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
 {
 
