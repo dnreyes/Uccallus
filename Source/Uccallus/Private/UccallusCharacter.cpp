@@ -43,4 +43,6 @@ AUccallusCharacter::AUccallusCharacter(const FObjectInitializer& ObjectInitializ
 	TopDownCameraComponent->AttachTo(CameraBoom, USpringArmComponent::SocketName);
 	TopDownCameraComponent->bUsePawnControlRotation = false; // Camera does not rotate relative to arm
 
+
+
 }
