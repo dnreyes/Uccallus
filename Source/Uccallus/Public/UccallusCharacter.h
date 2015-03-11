@@ -2,6 +2,8 @@
 #pragma once
 
 #include "GameFramework/Character.h"
+#include "Piece.h"
+#include "Gem.h"
 #include "UccallusCharacter.generated.h"
 
 class ALantern;
@@ -41,13 +43,13 @@ public:
     int32 energyLevel;
     
     UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Lantern)
-    TArray<AActor*> inLantern;
+    TArray<APiece*> inLantern;
     
     UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Lantern)
-    TArray<AActor*> pieces;
+    TArray<APiece*> pieces;
     
     UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Lantern)
-    TArray<AActor*> gems;
+    TArray<AGem*> gems;
     
 };
 
