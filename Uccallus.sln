@@ -1,15 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Engine", "Engine", "{2CFB8AC1-7615-48E2-AC73-2B1DEF41022C}"
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Engine", "Engine", "{66BC167B-FE2C-4C79-AEF3-6E5640D2B26C}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Games", "Games", "{A812D145-EDDC-45CB-8F3C-41534C4D520D}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Games", "Games", "{98A04B5C-E897-4671-ABA5-36EDA130C884}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Uccallus", "Intermediate\ProjectFiles\Uccallus.vcxproj", "{FFF0EB35-7650-4BDB-B358-7AFC81A668F7}"
-	ProjectSection(ProjectDependencies) = postProject
-	EndProjectSection
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Uccallus", "Intermediate\ProjectFiles\Uccallus.vcxproj", "{5DD2C836-8A25-474D-8665-A531640131AD}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UE4", "Intermediate\ProjectFiles\UE4.vcxproj", "{DF823134-0A2B-470B-8C7A-15558D71DFF8}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UE4", "Intermediate\ProjectFiles\UE4.vcxproj", "{E1BE733C-6081-499B-830E-9C6FAE856483}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,22 +20,27 @@ Global
 		Shipping|Windows = Shipping|Windows
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{FFF0EB35-7650-4BDB-B358-7AFC81A668F7}.DebugGame Editor|Windows.ActiveCfg = DebugGame_Editor|x64
-		{FFF0EB35-7650-4BDB-B358-7AFC81A668F7}.DebugGame Editor|Windows.Build.0 = DebugGame_Editor|x64
-		{FFF0EB35-7650-4BDB-B358-7AFC81A668F7}.DebugGame|Windows.ActiveCfg = DebugGame_Game|x64
-		{FFF0EB35-7650-4BDB-B358-7AFC81A668F7}.DebugGame|Windows.Build.0 = DebugGame_Game|x64
-		{FFF0EB35-7650-4BDB-B358-7AFC81A668F7}.Development Editor|Windows.ActiveCfg = Development_Editor|x64
-		{FFF0EB35-7650-4BDB-B358-7AFC81A668F7}.Development Editor|Windows.Build.0 = Development_Editor|x64
-		{FFF0EB35-7650-4BDB-B358-7AFC81A668F7}.Development|Windows.ActiveCfg = Development_Game|x64
-		{FFF0EB35-7650-4BDB-B358-7AFC81A668F7}.Development|Windows.Build.0 = Development_Game|x64
-		{FFF0EB35-7650-4BDB-B358-7AFC81A668F7}.Shipping|Windows.ActiveCfg = Shipping_Game|Win32
-		{FFF0EB35-7650-4BDB-B358-7AFC81A668F7}.Shipping|Windows.Build.0 = Shipping_Game|Win32
+		{5DD2C836-8A25-474D-8665-A531640131AD}.DebugGame Editor|Windows.ActiveCfg = DebugGame_Editor|x64
+		{5DD2C836-8A25-474D-8665-A531640131AD}.DebugGame Editor|Windows.Build.0 = DebugGame_Editor|x64
+		{5DD2C836-8A25-474D-8665-A531640131AD}.DebugGame|Windows.ActiveCfg = DebugGame_Game|x64
+		{5DD2C836-8A25-474D-8665-A531640131AD}.DebugGame|Windows.Build.0 = DebugGame_Game|x64
+		{5DD2C836-8A25-474D-8665-A531640131AD}.Development Editor|Windows.ActiveCfg = Development_Editor|x64
+		{5DD2C836-8A25-474D-8665-A531640131AD}.Development Editor|Windows.Build.0 = Development_Editor|x64
+		{5DD2C836-8A25-474D-8665-A531640131AD}.Development|Windows.ActiveCfg = Development_Game|x64
+		{5DD2C836-8A25-474D-8665-A531640131AD}.Development|Windows.Build.0 = Development_Game|x64
+		{5DD2C836-8A25-474D-8665-A531640131AD}.Shipping|Windows.ActiveCfg = Shipping_Game|Win32
+		{5DD2C836-8A25-474D-8665-A531640131AD}.Shipping|Windows.Build.0 = Shipping_Game|Win32
+		{E1BE733C-6081-499B-830E-9C6FAE856483}.DebugGame Editor|Windows.ActiveCfg = BuiltWithUnrealBuildTool|Win32
+		{E1BE733C-6081-499B-830E-9C6FAE856483}.DebugGame|Windows.ActiveCfg = BuiltWithUnrealBuildTool|Win32
+		{E1BE733C-6081-499B-830E-9C6FAE856483}.Development Editor|Windows.ActiveCfg = BuiltWithUnrealBuildTool|Win32
+		{E1BE733C-6081-499B-830E-9C6FAE856483}.Development|Windows.ActiveCfg = BuiltWithUnrealBuildTool|Win32
+		{E1BE733C-6081-499B-830E-9C6FAE856483}.Shipping|Windows.ActiveCfg = BuiltWithUnrealBuildTool|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{DF823134-0A2B-470B-8C7A-15558D71DFF8} = {2CFB8AC1-7615-48E2-AC73-2B1DEF41022C}
-		{FFF0EB35-7650-4BDB-B358-7AFC81A668F7} = {A812D145-EDDC-45CB-8F3C-41534C4D520D}
+		{5DD2C836-8A25-474D-8665-A531640131AD} = {98A04B5C-E897-4671-ABA5-36EDA130C884}
+		{E1BE733C-6081-499B-830E-9C6FAE856483} = {66BC167B-FE2C-4C79-AEF3-6E5640D2B26C}
 	EndGlobalSection
 EndGlobal
