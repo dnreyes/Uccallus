@@ -9,10 +9,14 @@
 UENUM(BlueprintType)
 enum class EPieceType : uint8
 {
-	P_Add = 1   UMETA(DisplayName = "Add"),
-	P_Subtract = 3   UMETA(DisplayName = "Subtract"),
-	P_Multiply = 5   UMETA(DisplayName = "Multiply"),
-	P_Exponent = 8   UMETA(DisplayName = "Exponent"),
+	P_Add			UMETA(DisplayName = "Add"),
+	P_Subtract		UMETA(DisplayName = "Subtract"),
+	P_Multiply		UMETA(DisplayName = "Multiply"),
+	P_Exponent		UMETA(DisplayName = "Exponent"),
+	P_Var			UMETA(DisplayName = "Variable"),
+	P_Log			UMETA(DisplayName = "Logarithm"),
+	P_Sqrt			UMETA(DisplayName = "Root"),
+	P_Half			UMETA(DisplayName = "Half")
 };
 
 USTRUCT(BlueprintType)
@@ -20,7 +24,7 @@ struct FPieceInfo
 {
 	GENERATED_USTRUCT_BODY()
 
-		UPROPERTY(BlueprintReadWrite)
+	UPROPERTY(BlueprintReadWrite)
 		UTexture2D* PieceIcon;
 
 	UPROPERTY(BlueprintReadWrite)

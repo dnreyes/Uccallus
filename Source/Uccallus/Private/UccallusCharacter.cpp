@@ -41,36 +41,30 @@ AUccallusCharacter::AUccallusCharacter(const FObjectInitializer& ObjectInitializ
 	TopDownCameraComponent = ObjectInitializer.CreateDefaultSubobject<UCameraComponent>(this, TEXT("TopDownCamera"));
 	TopDownCameraComponent->AttachTo(CameraBoom, USpringArmComponent::SocketName);
 	TopDownCameraComponent->bUsePawnControlRotation = false; // Camera does not rotate relative to arm
+
+	for (int i = 0; i < NUM_GEMTYPES; ++i)
+	{
+		FGemInfo NewInfo;
+		NewInfo.GemType = (EGemType)i;
+		GemCollection.Insert(NewInfo, i);
+	}
 }
 
-FGemInfo AUccallusCharacter::PickupGem(const AGem* GemActor)
+FGemInfo AUccallusCharacter::PickupGem(const APickupGem* GemActor)
 {
-	int i = 0;
-	int NumGems = GemCollection.Num();
-	for (; i < NumGems; ++i)
+	for (int i = 0; i < NUM_GEMTYPES; ++i)
 	{
-		if (GemCollection[i].GemType == GemActor->GemType) break;
+		if (GemCollection[i].GemType == GemActor->GemType)
+		{
+			GemCollection[i].Count++;
+			return GemCollection[i];
+		}
 	}
 
-	FGemInfo Result;
-
-	if (i < NumGems)
-	{
-		GemCollection[i].Count++;
-		Result = GemCollection[i];
-	}
-	else
-	{
-		Result.Count = 1;
-		Result.GemIcon = GemActor->GemIcon;
-		Result.GemType = GemActor->GemType;
-		GemCollection.Add(Result);
-	}
-
-	return Result;
+	return FGemInfo();
 }
 
-FPieceInfo AUccallusCharacter::PickupPiece(const APiece* PieceActor)
+FPieceInfo AUccallusCharacter::PickupPiece(const APickupPiece* PieceActor)
 {
 	int i = 0;
 	int NumPieces = PieceCollection.Num();

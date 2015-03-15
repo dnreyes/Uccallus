@@ -2,8 +2,8 @@
 #pragma once
 
 #include "GameFramework/Character.h"
-#include "Gem.h"
-#include "Piece.h"
+#include "PickupGem.h"
+#include "PickupPiece.h"
 #include "InLanternPiece.h"
 #include "UccallusCharacter.generated.h"
 
@@ -53,8 +53,8 @@ public:
 		TArray<FGemInfo> GemCollection;
 
 	UFUNCTION(BlueprintCallable, Category = LanternCollection)
-		FGemInfo PickupGem(const AGem* GemActor);
+		FGemInfo PickupGem(const APickupGem* GemActor);
 
 	UFUNCTION(BlueprintCallable, Category = LanternCollection)
-		FPieceInfo PickupPiece(const APiece* PieceActor);
+		FPieceInfo PickupPiece(const APickupPiece* PieceActor);
 };
