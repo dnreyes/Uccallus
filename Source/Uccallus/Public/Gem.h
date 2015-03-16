@@ -27,10 +27,10 @@ struct FGemInfo
 	GENERATED_USTRUCT_BODY()
 
 	UPROPERTY(BlueprintReadWrite)
-		EGemType GemType;
+		EGemType GemType = EGemType::G_Yellow;
 
 	UPROPERTY(BlueprintReadWrite)
-		int32 Count;
+		int32 Count = 0;
 };
 
 UCLASS()
