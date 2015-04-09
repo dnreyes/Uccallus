@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Engine", "Engine", "{5C4EB1A8-FC43-443A-A107-74347FD8BDA6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Games", "Games", "{BD3A12AA-AAB0-4BA5-AF83-D1E172B5F365}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Uccallus", "Intermediate\ProjectFiles\Uccallus.vcxproj", "{5DD2C836-8A25-474D-8665-A531640131AD}"
-	ProjectSection(ProjectDependencies) = postProject
-	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UE4", "Intermediate\ProjectFiles\UE4.vcxproj", "{E1BE733C-6081-499B-830E-9C6FAE856483}"
 EndProject
@@ -30,12 +30,17 @@ Global
 		{5DD2C836-8A25-474D-8665-A531640131AD}.Development|Windows.Build.0 = Development_Game|x64
 		{5DD2C836-8A25-474D-8665-A531640131AD}.Shipping|Windows.ActiveCfg = Shipping_Game|Win32
 		{5DD2C836-8A25-474D-8665-A531640131AD}.Shipping|Windows.Build.0 = Shipping_Game|Win32
+		{E1BE733C-6081-499B-830E-9C6FAE856483}.DebugGame Editor|Windows.ActiveCfg = BuiltWithUnrealBuildTool|Win32
+		{E1BE733C-6081-499B-830E-9C6FAE856483}.DebugGame|Windows.ActiveCfg = BuiltWithUnrealBuildTool|Win32
+		{E1BE733C-6081-499B-830E-9C6FAE856483}.Development Editor|Windows.ActiveCfg = BuiltWithUnrealBuildTool|Win32
+		{E1BE733C-6081-499B-830E-9C6FAE856483}.Development|Windows.ActiveCfg = BuiltWithUnrealBuildTool|Win32
+		{E1BE733C-6081-499B-830E-9C6FAE856483}.Shipping|Windows.ActiveCfg = BuiltWithUnrealBuildTool|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{E1BE733C-6081-499B-830E-9C6FAE856483} = {5C4EB1A8-FC43-443A-A107-74347FD8BDA6}
 		{5DD2C836-8A25-474D-8665-A531640131AD} = {BD3A12AA-AAB0-4BA5-AF83-D1E172B5F365}
+		{E1BE733C-6081-499B-830E-9C6FAE856483} = {5C4EB1A8-FC43-443A-A107-74347FD8BDA6}
 	EndGlobalSection
 EndGlobal
