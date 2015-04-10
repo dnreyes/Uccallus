@@ -89,3 +89,18 @@ FPieceInfo AUccallusCharacter::PickupPiece(const APickupPiece* PieceActor)
 
 	return Result;
 }
+
+FInLanternPiece AUccallusCharacter::LanternInsertPiece(EPieceType PieceType, int32 SlotIndex)
+{
+	FInLanternPiece Result;
+	Result.PieceType = PieceType;
+
+	return Result;
+}
+
+FInLanternPiece AUccallusCharacter::LanternRemovePiece(int32 SlotIndex)
+{
+	FInLanternPiece Result;
+
+	return Result;
+}

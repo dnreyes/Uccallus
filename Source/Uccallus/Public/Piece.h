@@ -40,7 +40,7 @@ struct FInLanternPiece
 		EPieceType PieceType;
 
 	UPROPERTY(BlueprintReadWrite)
-		int32 Count;
+		TArray<EGemType> PieceGems;
 };
 
 /**

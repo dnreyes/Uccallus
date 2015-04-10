@@ -56,4 +56,10 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = LanternCollection)
 		FPieceInfo PickupPiece(const APickupPiece* PieceActor);
+
+	UFUNCTION(BlueprintCallable, Category = LanternCollection)
+		FInLanternPiece LanternInsertPiece(EPieceType PieceType, int32 SlotIndex);
+
+	UFUNCTION(BlueprintCallable, Category = LanternCollection)
+		FInLanternPiece LanternRemovePiece(int32 SlotIndex);
 };
