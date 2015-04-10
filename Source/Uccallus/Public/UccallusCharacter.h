@@ -4,7 +4,6 @@
 #include "GameFramework/Character.h"
 #include "PickupGem.h"
 #include "PickupPiece.h"
-#include "InLanternPiece.h"
 #include "UccallusCharacter.generated.h"
 
 class ALantern;
@@ -44,7 +43,7 @@ public:
 		int32 energyLevel;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Lantern)
-		TArray<AInLanternPiece*> InLanternCollection;
+		TArray<FInLanternPiece> InLanternCollection;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Lantern)
 		TArray<FPieceInfo> PieceCollection;

@@ -83,7 +83,6 @@ FPieceInfo AUccallusCharacter::PickupPiece(const APickupPiece* PieceActor)
 	else
 	{
 		Result.Count = 1;
-		Result.PieceIcon = PieceActor->PieceIcon;
 		Result.PieceType = PieceActor->PieceType;
 		PieceCollection.Add(Result);
 	}

@@ -25,7 +25,16 @@ struct FPieceInfo
 	GENERATED_USTRUCT_BODY()
 
 	UPROPERTY(BlueprintReadWrite)
-		UTexture2D* PieceIcon;
+		EPieceType PieceType;
+
+	UPROPERTY(BlueprintReadWrite)
+		int32 Count;
+};
+
+USTRUCT(BlueprintType)
+struct FInLanternPiece
+{
+	GENERATED_USTRUCT_BODY()
 
 	UPROPERTY(BlueprintReadWrite)
 		EPieceType PieceType;
@@ -45,7 +54,4 @@ class UCCALLUS_API APiece : public AActor
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Properties)
 		EPieceType PieceType = EPieceType::P_Add;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Properties)
-		UTexture2D* PieceIcon;
 };
