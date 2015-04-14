@@ -14,6 +14,7 @@ enum class EPieceType : uint8
 	P_Multiply		UMETA(DisplayName = "Multiply"),
 	P_Exponent		UMETA(DisplayName = "Exponent"),
 	P_Var			UMETA(DisplayName = "Variable"),
+	P_Const			UMETA(DisplayName = "Constant"),
 	P_Log			UMETA(DisplayName = "Logarithm"),
 	P_Sqrt			UMETA(DisplayName = "Root"),
 	P_Half			UMETA(DisplayName = "Half")

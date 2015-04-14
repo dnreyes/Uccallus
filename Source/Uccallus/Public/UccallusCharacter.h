@@ -37,10 +37,13 @@ public:
 	* Radius of visibility will increase with each lantern piece found
 	*/
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Power)
-		float lightRadius;
+		float LightRadius;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Power)
-		int32 energyLevel;
+		int32 EnergyLevel;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Lantern)
+		int32 LanternMaxNumPieces = 13;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Lantern)
 		TArray<FInLanternPiece> InLanternCollection;
@@ -58,7 +61,7 @@ public:
 		FPieceInfo PickupPiece(const APickupPiece* PieceActor);
 
 	UFUNCTION(BlueprintCallable, Category = LanternCollection)
-		FInLanternPiece LanternInsertPiece(EPieceType PieceType, int32 SlotIndex);
+		void LanternInsertPiece(EPieceType PieceType, int32 SlotIndex);
 
 	UFUNCTION(BlueprintCallable, Category = LanternCollection)
 		FInLanternPiece LanternRemovePiece(int32 SlotIndex);

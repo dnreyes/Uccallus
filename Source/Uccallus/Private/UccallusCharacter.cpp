@@ -10,8 +10,8 @@ AUccallusCharacter::AUccallusCharacter(const FObjectInitializer& ObjectInitializ
 
 	/******----------------Added Code---------------******/
 
-	lightRadius = 10.0f;
-	energyLevel = 10;
+	LightRadius = 10.0f;
+	EnergyLevel = 10;
 
 	/******------------End of Added Code------------******/
 
@@ -90,17 +90,21 @@ FPieceInfo AUccallusCharacter::PickupPiece(const APickupPiece* PieceActor)
 	return Result;
 }
 
-FInLanternPiece AUccallusCharacter::LanternInsertPiece(EPieceType PieceType, int32 SlotIndex)
+void AUccallusCharacter::LanternInsertPiece(EPieceType PieceType, int32 SlotIndex)
 {
+	if (InLanternCollection.Num() >= LanternMaxNumPieces) return;
+
 	FInLanternPiece Result;
 	Result.PieceType = PieceType;
 
-	return Result;
+	InLanternCollection.Insert(Result, SlotIndex);
 }
 
 FInLanternPiece AUccallusCharacter::LanternRemovePiece(int32 SlotIndex)
 {
 	FInLanternPiece Result;
+
+	InLanternCollection.RemoveAt(SlotIndex);
 
 	return Result;
 }
