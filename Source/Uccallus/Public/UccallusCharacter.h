@@ -55,6 +55,12 @@ public:
 		TArray<FGemInfo> GemCollection;
 
 	UFUNCTION(BlueprintCallable, Category = LanternCollection)
+		FGemInfo CollectionAddGem(const EGemType GemType);
+
+	UFUNCTION(BlueprintCallable, Category = LanternCollection)
+		FPieceInfo CollectionAddPiece(const EPieceType PieceType);
+
+	UFUNCTION(BlueprintCallable, Category = LanternCollection)
 		FGemInfo PickupGem(const APickupGem* GemActor);
 
 	UFUNCTION(BlueprintCallable, Category = LanternCollection)
@@ -65,4 +71,10 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = LanternCollection)
 		FInLanternPiece LanternRemovePiece(int32 SlotIndex);
+
+	UFUNCTION(BlueprintCallable, Category = LanternCollection)
+		void LanternPieceInsertGem(EGemType GemType, int32 PieceSlotIndex, int32 GemSlotIndex);
+
+	UFUNCTION(BlueprintCallable, Category = LanternCollection)
+		EGemType LanternPieceRemoveGem(int32 PieceSlotIndex, int32 GemSlotIndex);
 };

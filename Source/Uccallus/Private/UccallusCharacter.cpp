@@ -3,6 +3,7 @@
 #include "Uccallus.h"
 #include "UccallusCharacter.h"
 #include "Animation/AnimInstance.h"
+#include "Engine.h"
 
 AUccallusCharacter::AUccallusCharacter(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
@@ -45,16 +46,16 @@ AUccallusCharacter::AUccallusCharacter(const FObjectInitializer& ObjectInitializ
 	for (int i = 0; i < NUM_GEMTYPES; ++i)
 	{
 		FGemInfo NewInfo;
-		NewInfo.GemType = (EGemType)i;
+		NewInfo.GemType = (EGemType)(i + 1);
 		GemCollection.Insert(NewInfo, i);
 	}
 }
 
-FGemInfo AUccallusCharacter::PickupGem(const APickupGem* GemActor)
+FGemInfo AUccallusCharacter::CollectionAddGem(const EGemType GemType)
 {
 	for (int i = 0; i < NUM_GEMTYPES; ++i)
 	{
-		if (GemCollection[i].GemType == GemActor->GemType)
+		if (GemCollection[i].GemType == GemType)
 		{
 			GemCollection[i].Count++;
 			return GemCollection[i];
@@ -64,13 +65,18 @@ FGemInfo AUccallusCharacter::PickupGem(const APickupGem* GemActor)
 	return FGemInfo();
 }
 
-FPieceInfo AUccallusCharacter::PickupPiece(const APickupPiece* PieceActor)
+FGemInfo AUccallusCharacter::PickupGem(const APickupGem* GemActor)
+{
+	return CollectionAddGem(GemActor->GemType);
+}
+
+FPieceInfo AUccallusCharacter::CollectionAddPiece(const EPieceType PieceType)
 {
 	int i = 0;
 	int NumPieces = PieceCollection.Num();
 	for (; i < NumPieces; ++i)
 	{
-		if (PieceCollection[i].PieceType == PieceActor->PieceType) break;
+		if (PieceCollection[i].PieceType == PieceType) break;
 	}
 
 	FPieceInfo Result;
@@ -83,11 +89,16 @@ FPieceInfo AUccallusCharacter::PickupPiece(const APickupPiece* PieceActor)
 	else
 	{
 		Result.Count = 1;
-		Result.PieceType = PieceActor->PieceType;
+		Result.PieceType = PieceType;
 		PieceCollection.Add(Result);
 	}
 
 	return Result;
+}
+
+FPieceInfo AUccallusCharacter::PickupPiece(const APickupPiece* PieceActor)
+{
+	return CollectionAddPiece(PieceActor->PieceType);
 }
 
 void AUccallusCharacter::LanternInsertPiece(EPieceType PieceType, int32 SlotIndex)
@@ -104,7 +115,45 @@ FInLanternPiece AUccallusCharacter::LanternRemovePiece(int32 SlotIndex)
 {
 	FInLanternPiece Result;
 
-	InLanternCollection.RemoveAt(SlotIndex);
+	if (InLanternCollection.Num() > SlotIndex)
+	{
+		Result = InLanternCollection[SlotIndex];
+		if (Result.PieceGems.Num() > 0)
+		{
+			for (const EGemType &Gem : Result.PieceGems)
+			{
+				if (Gem != EGemType::G_None)
+				{
+					CollectionAddGem(Gem);
+				}
+			}
+		}
+		InLanternCollection.RemoveAt(SlotIndex);
+	}
 
+	return Result;
+}
+
+void AUccallusCharacter::LanternPieceInsertGem(EGemType GemType, int32 PieceSlotIndex, int32 GemSlotIndex)
+{
+	if (InLanternCollection[PieceSlotIndex].PieceGems.Num() <= GemSlotIndex)
+	{
+		InLanternCollection[PieceSlotIndex].PieceGems.Empty();
+		InLanternCollection[PieceSlotIndex].PieceGems.AddUninitialized(GemSlotIndex + 1);
+	}
+
+	InLanternCollection[PieceSlotIndex].PieceGems[GemSlotIndex] = GemType;
+	
+}
+
+EGemType AUccallusCharacter::LanternPieceRemoveGem(int32 PieceSlotIndex, int32 GemSlotIndex)
+{
+	FInLanternPiece Piece = InLanternCollection[PieceSlotIndex];
+	EGemType Result;
+	if (Piece.PieceGems.Num() > GemSlotIndex)
+	{
+		Result = Piece.PieceGems[GemSlotIndex];
+		InLanternCollection[PieceSlotIndex].PieceGems[GemSlotIndex] = EGemType::G_None;
+	}
 	return Result;
 }

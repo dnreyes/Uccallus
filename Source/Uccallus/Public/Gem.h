@@ -14,8 +14,9 @@ const int32 NUM_GEMTYPES = 5;
 UENUM(BlueprintType)
 enum class EGemType : uint8
 {
+	G_None			UMETA(DisplayName = "None"),
 	G_Yellow		UMETA(DisplayName = "Yellow"),
-	G_Green			UMETA(DisplayName = "Green"),
+	G_Blue			UMETA(DisplayName = "Blue"),
 	G_Red			UMETA(DisplayName = "Red"),
 	G_Pearl			UMETA(DisplayName = "Pearl"),
 	G_Diamond		UMETA(DisplayName = "Diamond")
@@ -27,7 +28,7 @@ struct FGemInfo
 	GENERATED_USTRUCT_BODY()
 
 	UPROPERTY(BlueprintReadWrite)
-		EGemType GemType = EGemType::G_Yellow;
+		EGemType GemType = EGemType::G_None;
 
 	UPROPERTY(BlueprintReadWrite)
 		int32 Count = 0;
@@ -40,5 +41,5 @@ class UCCALLUS_API AGem : public AActor
 
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Properties)
-		EGemType GemType = EGemType::G_Yellow;
+		EGemType GemType = EGemType::G_None;
 };

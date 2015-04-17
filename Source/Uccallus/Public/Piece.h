@@ -9,6 +9,7 @@
 UENUM(BlueprintType)
 enum class EPieceType : uint8
 {
+	P_None			UMETA(DisplayName = "None"),
 	P_Add			UMETA(DisplayName = "Add"),
 	P_Subtract		UMETA(DisplayName = "Subtract"),
 	P_Multiply		UMETA(DisplayName = "Multiply"),
@@ -26,7 +27,7 @@ struct FPieceInfo
 	GENERATED_USTRUCT_BODY()
 
 	UPROPERTY(BlueprintReadWrite)
-		EPieceType PieceType;
+		EPieceType PieceType = EPieceType::P_None;
 
 	UPROPERTY(BlueprintReadWrite)
 		int32 Count;
@@ -38,7 +39,7 @@ struct FInLanternPiece
 	GENERATED_USTRUCT_BODY()
 
 	UPROPERTY(BlueprintReadWrite)
-		EPieceType PieceType;
+		EPieceType PieceType = EPieceType::P_None;
 
 	UPROPERTY(BlueprintReadWrite)
 		TArray<EGemType> PieceGems;
@@ -54,5 +55,5 @@ class UCCALLUS_API APiece : public AActor
 
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Properties)
-		EPieceType PieceType = EPieceType::P_Add;
+		EPieceType PieceType = EPieceType::P_None;
 };
