@@ -15,10 +15,10 @@ UENUM(BlueprintType)
 enum class EGemType : uint8
 {
 	G_None			UMETA(DisplayName = "None"),
+	G_Clear			UMETA(DisplayName = "Clear"),
 	G_Yellow		UMETA(DisplayName = "Yellow"),
 	G_Blue			UMETA(DisplayName = "Blue"),
 	G_Red			UMETA(DisplayName = "Red"),
-	G_Pearl			UMETA(DisplayName = "Pearl"),
 	G_Diamond		UMETA(DisplayName = "Diamond")
 };
 
