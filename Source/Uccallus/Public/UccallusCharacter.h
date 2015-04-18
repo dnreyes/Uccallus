@@ -76,5 +76,14 @@ public:
 		void LanternPieceInsertGem(EGemType GemType, int32 PieceSlotIndex, int32 GemSlotIndex);
 
 	UFUNCTION(BlueprintCallable, Category = LanternCollection)
+		EGemType GetLanternCollectionGemType(int32 PieceSlotIndex, int32 GemSlotIndex);
+
+	UFUNCTION(BlueprintCallable, Category = LanternCollection)
+		EPieceType GetLanternCollectionPieceType(int32 PieceSlotIndex);
+
+	UFUNCTION(BlueprintCallable, Category = LanternCollection)
+		bool IsEquationValid();
+
+	UFUNCTION(BlueprintCallable, Category = LanternCollection)
 		EGemType LanternPieceRemoveGem(int32 PieceSlotIndex, int32 GemSlotIndex);
 };

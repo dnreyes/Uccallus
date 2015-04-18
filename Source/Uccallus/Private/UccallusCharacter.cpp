@@ -146,6 +146,20 @@ void AUccallusCharacter::LanternPieceInsertGem(EGemType GemType, int32 PieceSlot
 	
 }
 
+//Returns the color of the gem within the constant piece inside the lantern
+EGemType AUccallusCharacter::GetLanternCollectionGemType(int32 PieceSlotIndex, int32 GemSlotIndex) {
+	return InLanternCollection[PieceSlotIndex].PieceGems[GemSlotIndex];
+}
+
+//Returns the name of the pieces within the lantern
+EPieceType AUccallusCharacter::GetLanternCollectionPieceType(int32 PieceSlotIndex) {
+	return InLanternCollection[PieceSlotIndex].PieceType;
+}
+
+bool AUccallusCharacter::IsEquationValid() {
+
+}
+
 EGemType AUccallusCharacter::LanternPieceRemoveGem(int32 PieceSlotIndex, int32 GemSlotIndex)
 {
 	FInLanternPiece Piece = InLanternCollection[PieceSlotIndex];
