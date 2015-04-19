@@ -9,13 +9,6 @@ AUccallusCharacter::AUccallusCharacter(const FObjectInitializer& ObjectInitializ
 	: Super(ObjectInitializer)
 {
 
-	/******----------------Added Code---------------******/
-
-	LightRadius = 10.0f;
-	EnergyLevel = 10;
-
-	/******------------End of Added Code------------******/
-
 	// Set size for player capsule
 	GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
 
@@ -156,8 +149,42 @@ EPieceType AUccallusCharacter::GetLanternCollectionPieceType(int32 PieceSlotInde
 	return InLanternCollection[PieceSlotIndex].PieceType;
 }
 
+//checks to see if the equation inside the lantern is an actual equation
+//if the lantern is empty or the equation is not right, then it will return false
+//if it correlates to an equation, then it will return true.
 bool AUccallusCharacter::IsEquationValid() {
-
+	//empty case
+	if (InLanternCollection.Num() == 0){
+		UE_LOG(LogTemp, Log, TEXT("There is nothing in the lantern. Hooray!"));
+		return false;
+	}
+	//lantern contains something inside
+		//case for y = x or y = const
+	else if (InLanternCollection.Num() == 1) {
+		//get the piece type from the first slot since there's only one piece
+		//EPieceType P = GetLanternCollectionPieceType(0);
+		EPieceType P = GetLanternCollectionPieceType(1);
+		//UE_LOG(LogTemp, Log, TEXT("Piece is currently %s"), P);
+		//If it's anything but a const piece or a variable x, it's not a valid equation for this case.
+		if ((P != EPieceType::P_Const) || (P != EPieceType::P_Var)){
+			//For debugging only, DELETE WHEN FINISHED USING
+			UE_LOG(LogTemp, Log, TEXT("The piece is not a constant nor a variable"));
+			return false;
+		}
+		else {
+			//For debugging only, DELETE WHEN FINISHED USING
+			UE_LOG(LogTemp, Log, TEXT("The piece is a constant or a variable."));
+			return true;
+		}
+	}
+	//Else it is an actual equation
+	else {
+		//The smallest amount of pieces should follow n + n
+		if (InLanternCollection.Num() > 2)
+			return true;
+		else return false;
+	}
+	//return false;
 }
 
 EGemType AUccallusCharacter::LanternPieceRemoveGem(int32 PieceSlotIndex, int32 GemSlotIndex)
