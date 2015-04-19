@@ -6,8 +6,6 @@
 #include "PickupPiece.h"
 #include "UccallusCharacter.generated.h"
 
-class ALantern;
-
 UCLASS(Blueprintable)
 class AUccallusCharacter : public ACharacter
 {
@@ -31,7 +29,10 @@ public:
 	/** Returns CameraBoom subobject **/
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
 
-	/***----------ADDED CODE BASED OF TUTORIAL----------***/
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Lantern)
+		int32 LanternMaxNumPieces = 13;
+
+	//====Game Data====
 
 	/*
 	* Radius of visibility will increase with each lantern piece found
@@ -42,29 +43,36 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Power)
 		int32 EnergyLevel;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Lantern)
-		int32 LanternMaxNumPieces = 13;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Lantern)
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Collection)
 		TArray<FInLanternPiece> InLanternCollection;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Lantern)
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Collection)
 		TArray<FPieceInfo> PieceCollection;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Lantern)
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Collection)
 		TArray<FGemInfo> GemCollection;
 
-	UFUNCTION(BlueprintCallable, Category = LanternCollection)
+	//=====Collection Functions=====
+
+	UFUNCTION(BlueprintCallable, Category = Collection)
 		FGemInfo CollectionAddGem(const EGemType GemType);
 
-	UFUNCTION(BlueprintCallable, Category = LanternCollection)
+	UFUNCTION(BlueprintCallable, Category = Collection)
 		FPieceInfo CollectionAddPiece(const EPieceType PieceType);
 
-	UFUNCTION(BlueprintCallable, Category = LanternCollection)
+	UFUNCTION(BlueprintCallable, Category = Collection)
+		void CollectionDepleteGem(const EGemType GemType);
+
+	UFUNCTION(BlueprintCallable, Category = Collection)
+		void CollectionDepletePiece(const EPieceType PieceType);
+
+	UFUNCTION(BlueprintCallable, Category = Collection)
 		FGemInfo PickupGem(const APickupGem* GemActor);
 
-	UFUNCTION(BlueprintCallable, Category = LanternCollection)
+	UFUNCTION(BlueprintCallable, Category = Collection)
 		FPieceInfo PickupPiece(const APickupPiece* PieceActor);
+
+	//=====In Lantern Collection Functions=====
 
 	UFUNCTION(BlueprintCallable, Category = LanternCollection)
 		void LanternInsertPiece(EPieceType PieceType, int32 SlotIndex);

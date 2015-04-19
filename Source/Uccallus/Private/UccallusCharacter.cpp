@@ -65,11 +65,6 @@ FGemInfo AUccallusCharacter::CollectionAddGem(const EGemType GemType)
 	return FGemInfo();
 }
 
-FGemInfo AUccallusCharacter::PickupGem(const APickupGem* GemActor)
-{
-	return CollectionAddGem(GemActor->GemType);
-}
-
 FPieceInfo AUccallusCharacter::CollectionAddPiece(const EPieceType PieceType)
 {
 	int i = 0;
@@ -94,6 +89,41 @@ FPieceInfo AUccallusCharacter::CollectionAddPiece(const EPieceType PieceType)
 	}
 
 	return Result;
+}
+
+void AUccallusCharacter::CollectionDepleteGem(const EGemType GemType)
+{
+	for (int i = 0; i < NUM_GEMTYPES; ++i)
+	{
+		if (GemCollection[i].GemType == GemType)
+		{
+			GemCollection[i].Count = FMath::Max(0, GemCollection[i].Count - 1);
+			return;
+		}
+	}
+}
+
+void AUccallusCharacter::CollectionDepletePiece(const EPieceType PieceType)
+{
+	int i = 0;
+	int NumPieces = PieceCollection.Num();
+	for (; i < NumPieces; ++i)
+	{
+		if (PieceCollection[i].PieceType == PieceType)
+		{
+			PieceCollection[i].Count = FMath::Max(0, PieceCollection[i].Count - 1);
+			if (PieceCollection[i].Count <= 0)
+			{
+				PieceCollection.RemoveAt(i);
+			}
+			return;
+		}
+	}
+}
+
+FGemInfo AUccallusCharacter::PickupGem(const APickupGem* GemActor)
+{
+	return CollectionAddGem(GemActor->GemType);
 }
 
 FPieceInfo AUccallusCharacter::PickupPiece(const APickupPiece* PieceActor)
@@ -142,6 +172,9 @@ void AUccallusCharacter::LanternPieceInsertGem(EGemType GemType, int32 PieceSlot
 		InLanternCollection[PieceSlotIndex].PieceGems.AddUninitialized(GemSlotIndex + 1);
 	}
 
+	if (InLanternCollection[PieceSlotIndex].PieceGems[GemSlotIndex] != EGemType::G_None)
+		CollectionAddGem(InLanternCollection[PieceSlotIndex].PieceGems[GemSlotIndex]);
+
 	InLanternCollection[PieceSlotIndex].PieceGems[GemSlotIndex] = GemType;
 	
 }
@@ -149,7 +182,7 @@ void AUccallusCharacter::LanternPieceInsertGem(EGemType GemType, int32 PieceSlot
 EGemType AUccallusCharacter::LanternPieceRemoveGem(int32 PieceSlotIndex, int32 GemSlotIndex)
 {
 	FInLanternPiece Piece = InLanternCollection[PieceSlotIndex];
-	EGemType Result;
+	EGemType Result = EGemType::G_None;
 	if (Piece.PieceGems.Num() > GemSlotIndex)
 	{
 		Result = Piece.PieceGems[GemSlotIndex];
