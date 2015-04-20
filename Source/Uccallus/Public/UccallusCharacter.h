@@ -86,7 +86,4 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Equation)
 		EPieceType GetLanternCollectionPieceType(int32 PieceSlotIndex);
 
-	UFUNCTION(BlueprintCallable, Category = Equation)
-		bool IsEquationValid();
-
 };
