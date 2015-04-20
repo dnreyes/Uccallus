@@ -58,11 +58,6 @@ FGemInfo AUccallusCharacter::CollectionAddGem(const EGemType GemType)
 	return FGemInfo();
 }
 
-FGemInfo AUccallusCharacter::PickupGem(const APickupGem* GemActor)
-{
-	return CollectionAddGem(GemActor->GemType);
-}
-
 FPieceInfo AUccallusCharacter::CollectionAddPiece(const EPieceType PieceType)
 {
 	int i = 0;
@@ -88,6 +83,42 @@ FPieceInfo AUccallusCharacter::CollectionAddPiece(const EPieceType PieceType)
 
 	return Result;
 }
+
+void AUccallusCharacter::CollectionDepleteGem(const EGemType GemType)
+{
+	for (int i = 0; i < NUM_GEMTYPES; ++i)
+	{
+		if (GemCollection[i].GemType == GemType)
+		{
+			GemCollection[i].Count = FMath::Max(0, GemCollection[i].Count - 1);
+			return;
+		}
+	}
+}
+
+void AUccallusCharacter::CollectionDepletePiece(const EPieceType PieceType)
+{
+	int i = 0;
+	int NumPieces = PieceCollection.Num();
+	for (; i < NumPieces; ++i)
+	{
+		if (PieceCollection[i].PieceType == PieceType)
+		{
+			PieceCollection[i].Count = FMath::Max(0, PieceCollection[i].Count - 1);
+			if (PieceCollection[i].Count <= 0)
+			{
+				PieceCollection.RemoveAt(i);
+			}
+			return;
+		}
+	}
+}
+
+FGemInfo AUccallusCharacter::PickupGem(const APickupGem* GemActor)
+{
+	return CollectionAddGem(GemActor->GemType);
+}
+
 
 FPieceInfo AUccallusCharacter::PickupPiece(const APickupPiece* PieceActor)
 {
@@ -139,6 +170,18 @@ void AUccallusCharacter::LanternPieceInsertGem(EGemType GemType, int32 PieceSlot
 	
 }
 
+EGemType AUccallusCharacter::LanternPieceRemoveGem(int32 PieceSlotIndex, int32 GemSlotIndex)
+{
+	FInLanternPiece Piece = InLanternCollection[PieceSlotIndex];
+	EGemType Result;
+	if (Piece.PieceGems.Num() > GemSlotIndex)
+	{
+		Result = Piece.PieceGems[GemSlotIndex];
+		InLanternCollection[PieceSlotIndex].PieceGems[GemSlotIndex] = EGemType::G_None;
+	}
+	return Result;
+}
+
 //Returns the color of the gem within the constant piece inside the lantern
 EGemType AUccallusCharacter::GetLanternCollectionGemType(int32 PieceSlotIndex, int32 GemSlotIndex) {
 	return InLanternCollection[PieceSlotIndex].PieceGems[GemSlotIndex];
@@ -185,16 +228,4 @@ bool AUccallusCharacter::IsEquationValid() {
 		else return false;
 	}
 	//return false;
-}
-
-EGemType AUccallusCharacter::LanternPieceRemoveGem(int32 PieceSlotIndex, int32 GemSlotIndex)
-{
-	FInLanternPiece Piece = InLanternCollection[PieceSlotIndex];
-	EGemType Result;
-	if (Piece.PieceGems.Num() > GemSlotIndex)
-	{
-		Result = Piece.PieceGems[GemSlotIndex];
-		InLanternCollection[PieceSlotIndex].PieceGems[GemSlotIndex] = EGemType::G_None;
-	}
-	return Result;
 }

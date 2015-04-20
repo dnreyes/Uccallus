@@ -13,8 +13,8 @@ class AUccallusCharacter : public ACharacter
 {
 	GENERATED_BODY()
 
-		/** Top down camera */
-		UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
+	/** Top down camera */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	class UCameraComponent* TopDownCameraComponent;
 
 	/** Camera boom positioning the camera above the character */
@@ -31,30 +31,40 @@ public:
 	/** Returns CameraBoom subobject **/
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
 
-
+	//===Game Data ====
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Lantern)
 		int32 LanternMaxNumPieces = 13;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Lantern)
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Collection)
 		TArray<FInLanternPiece> InLanternCollection;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Lantern)
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Collection)
 		TArray<FPieceInfo> PieceCollection;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Lantern)
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Collection)
 		TArray<FGemInfo> GemCollection;
 
-	UFUNCTION(BlueprintCallable, Category = LanternCollection)
+	//===Collection Functions===
+
+	UFUNCTION(BlueprintCallable, Category = Collection)
 		FGemInfo CollectionAddGem(const EGemType GemType);
 
-	UFUNCTION(BlueprintCallable, Category = LanternCollection)
+	UFUNCTION(BlueprintCallable, Category = Collection)
 		FPieceInfo CollectionAddPiece(const EPieceType PieceType);
 
-	UFUNCTION(BlueprintCallable, Category = LanternCollection)
+	UFUNCTION(BlueprintCallable, Category = Collection)
+		void CollectionDepleteGem(const EGemType GemType);
+
+	UFUNCTION(BlueprintCallable, Category = Collection)
+		void CollectionDepletePiece(const EPieceType PieceType);
+
+	UFUNCTION(BlueprintCallable, Category = Collection)
 		FGemInfo PickupGem(const APickupGem* GemActor);
 
-	UFUNCTION(BlueprintCallable, Category = LanternCollection)
+	UFUNCTION(BlueprintCallable, Category = Collection)
 		FPieceInfo PickupPiece(const APickupPiece* PieceActor);
+
+	//===In Lantern Functions===
 
 	UFUNCTION(BlueprintCallable, Category = LanternCollection)
 		void LanternInsertPiece(EPieceType PieceType, int32 SlotIndex);
@@ -66,14 +76,17 @@ public:
 		void LanternPieceInsertGem(EGemType GemType, int32 PieceSlotIndex, int32 GemSlotIndex);
 
 	UFUNCTION(BlueprintCallable, Category = LanternCollection)
+		EGemType LanternPieceRemoveGem(int32 PieceSlotIndex, int32 GemSlotIndex);
+
+	//===Equation Functions===
+
+	UFUNCTION(BlueprintCallable, Category = Equation)
 		EGemType GetLanternCollectionGemType(int32 PieceSlotIndex, int32 GemSlotIndex);
 
-	UFUNCTION(BlueprintCallable, Category = LanternCollection)
+	UFUNCTION(BlueprintCallable, Category = Equation)
 		EPieceType GetLanternCollectionPieceType(int32 PieceSlotIndex);
 
-	UFUNCTION(BlueprintCallable, Category = LanternCollection)
+	UFUNCTION(BlueprintCallable, Category = Equation)
 		bool IsEquationValid();
 
-	UFUNCTION(BlueprintCallable, Category = LanternCollection)
-		EGemType LanternPieceRemoveGem(int32 PieceSlotIndex, int32 GemSlotIndex);
 };
