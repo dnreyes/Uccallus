@@ -205,8 +205,7 @@ bool AUccallusCharacter::IsEquationValid() {
 		//case for y = x or y = const
 	else if (InLanternCollection.Num() == 1) {
 		//get the piece type from the first slot since there's only one piece
-		//EPieceType P = GetLanternCollectionPieceType(0);
-		EPieceType P = GetLanternCollectionPieceType(1);
+		EPieceType P = GetLanternCollectionPieceType(0);
 		//UE_LOG(LogTemp, Log, TEXT("Piece is currently %s"), P);
 		//If it's anything but a const piece or a variable x, it's not a valid equation for this case.
 		if ((P != EPieceType::P_Const) || (P != EPieceType::P_Var)){
