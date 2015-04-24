@@ -8,14 +8,6 @@
 AUccallusCharacter::AUccallusCharacter(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
-
-	/******----------------Added Code---------------******/
-
-	LightRadius = 10.0f;
-	EnergyLevel = 10;
-
-	/******------------End of Added Code------------******/
-
 	// Set size for player capsule
 	GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
 
@@ -189,4 +181,14 @@ EGemType AUccallusCharacter::LanternPieceRemoveGem(int32 PieceSlotIndex, int32 G
 		InLanternCollection[PieceSlotIndex].PieceGems[GemSlotIndex] = EGemType::G_None;
 	}
 	return Result;
+}
+
+EGemType AUccallusCharacter::GetLanternCollectionGemType(int32 PieceSlotIndex, int32 GemSlotIndex)
+{
+	return InLanternCollection[PieceSlotIndex].PieceGems[GemSlotIndex];
+}
+
+EPieceType AUccallusCharacter::GetLanternCollectionPieceType(int32 PieceSlotIndex)
+{
+	return InLanternCollection[PieceSlotIndex].PieceType;
 }
