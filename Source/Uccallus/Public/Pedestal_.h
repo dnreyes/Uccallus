@@ -26,16 +26,16 @@ public:
 		TArray<FPieceInfo> InLanternPieceCollection;
 
 	//===Functions===
-	UFUNCTION(BlueprintCallable, Category = Lantern)
+	UFUNCTION(BlueprintNativeEvent, Category = Lantern)
 		virtual bool IsEquationValid();
 	
-	UFUNCTION(BlueprintCallable, Category = Pedestal)
+	UFUNCTION(BlueprintNativeEvent, Category = Pedestal)
 		virtual void Activate();
 
-	UFUNCTION(BlueprintCallable, Category = Pedestal)
+	UFUNCTION(BlueprintEvent, Category = Pedestal)
 		virtual void Move(int32 whereTo);
 
-	UFUNCTION(BlueprintCallable, Category = Pedestal)
+	UFUNCTION(BlueprintEvent, Category = Pedestal)
 		virtual void Launch(int32 shootWhere);
 	
 };
